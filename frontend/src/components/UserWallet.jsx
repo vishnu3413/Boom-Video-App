@@ -1,34 +1,11 @@
-import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import defaultUserIcon from "../assets/avatar.png";
 import icon from "../assets/logo.png";
-import api from "../services/api";
+import { useWallet } from "./WalletContext.jsx";
 
 const UserWallet = () => {
-  const [walletAmount, setWalletAmount] = useState(null);
-  const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
-
-  useEffect(() => {
-    const fetchWalletAmount = async () => {
-      try {
-        const token = localStorage.getItem("token");
-        if (!token) {
-          setLoading(false);
-          return;
-        }
-
-        const response = await api.get("/wallet");
-        setWalletAmount(response.data.balance);
-      } catch (error) {
-        console.error("Failed to fetch wallet amount", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchWalletAmount();
-  }, []);
+  const { walletAmount, loading } = useWallet();
 
   const handleLogout = () => {
     localStorage.removeItem("token");
