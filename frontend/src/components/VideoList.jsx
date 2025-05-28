@@ -103,7 +103,7 @@ const VideoList = () => {
           <div className="flex flex-col gap-8 max-w-2xl mx-auto">
             {displayedVideos.map((video) => {
               const isPurchased = purchasedVideos.includes(video.id);
-
+              console.log(video.videoType)
               return (
                 <div
                   key={video.id}
@@ -113,6 +113,7 @@ const VideoList = () => {
                     {video.videoType === "Short-Form" ? (
                       <video
                         src={video.videoUrl}
+                        autoPlay
                         muted
                         loop
                         playsInline
