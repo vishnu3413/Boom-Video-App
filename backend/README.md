@@ -6,7 +6,7 @@ Boom Video App - Backend is designed to manage  within an ERP system. This API e
 
 ## Features
 
-- **RESTful APIs**: Endpoints for managing various healthcare data.
+- **RESTful APIs**: Endpoints for managing various data.
 - **Modular Structure**: Organized into controllers, models, routes, and utils for better maintainability.
 - **Environment-Based Configurations**: Supports enivronement configurations.
 

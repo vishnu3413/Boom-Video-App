@@ -49,8 +49,10 @@ Follow these steps to set up the project locally:
 2. **Install dependencies:**
   
   Install dependencies for backend and frontned by using:
+  
   ```bash
-   npm install
+  npm install
+  ```
 
 3. **Set up environment variables:**
 
