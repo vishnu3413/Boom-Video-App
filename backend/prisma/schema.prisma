@@ -1,0 +1,51 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  email     String   @unique
+  password  String
+  wallet    Int      @default(500)
+  videos    Video[]
+  purchases Purchase[]
+  comments  Comment[]
+}
+
+model Video {
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  title       String
+  description String
+  videoType   String   
+  videoUrl    String   
+  price       Int
+  createdAt   DateTime @default(now())
+  creatorId   String   @db.ObjectId
+  creator     User     @relation(fields: [creatorId], references: [id])
+  purchases   Purchase[]
+  comments    Comment[]
+}
+
+model Purchase {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  userId    String   @db.ObjectId
+  videoId   String   @db.ObjectId
+  createdAt DateTime @default(now())
+  video     Video    @relation(fields: [videoId], references: [id])
+  user      User     @relation(fields: [userId], references: [id])
+}
+
+model Comment {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  userId    String   @db.ObjectId
+  content   String
+  videoId   String   @db.ObjectId
+  createdAt DateTime @default(now())
+  video     Video    @relation(fields: [videoId], references: [id])
+  user      User     @relation(fields: [userId], references: [id])
+}
